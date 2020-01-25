@@ -1,0 +1,25 @@
+server:
+  servlet:
+    contextPath: /
+  port: 9001
+spring:
+  application:
+    name: ms-item
+# configuracion ribbon
+#ms-product:
+#  ribbon:
+#    listOfServers: "localhost:9000, localhost:8999"
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 20000
+#ribbon:
+#  ConnectTimeout: 3000
+#  ReadTimeout: 10000
