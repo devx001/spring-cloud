@@ -5,6 +5,6 @@ spring:
     config:
       server:
         git:
-          uri:
+          uri: file:/home/juanp/git/spring-cloud/configs/
 server:
   port: 8888
