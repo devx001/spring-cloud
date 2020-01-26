@@ -4,15 +4,19 @@ import com.devx.item.msitem.model.Item;
 import com.devx.item.msitem.model.Product;
 import com.devx.item.msitem.service.IItemService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
+@Api(tags = "/item")
 @RestController
 @RequestMapping("/item")
 public class ItemController {
@@ -21,11 +25,35 @@ public class ItemController {
     private IItemService itemService;
 
 
+    @ApiOperation(
+            value = "Gets ITEMS",
+            notes = "On call, to get items",
+            response = Product.class
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success")
+            ,
+            @ApiResponse(code = 404, message = "Data not found")
+            ,
+            @ApiResponse(code = 502, message = "Remote MULE service not available")
+    })
     @GetMapping("/")
     public ResponseEntity<List<Item>> findAll (){
         return ResponseEntity.ok(itemService.findAll());
     }
 
+    @ApiOperation(
+            value = "Gets item",
+            notes = "On call, to get item",
+            response = Product.class
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success")
+            ,
+            @ApiResponse(code = 404, message = "Data not found")
+            ,
+            @ApiResponse(code = 502, message = "Remote MULE service not available")
+    })
     @HystrixCommand(fallbackMethod = "supportMethod")
     @GetMapping("/{id}/count/{count}")
     public ResponseEntity<Item> findById (@PathVariable(name = "id") Integer id, @PathVariable(name = "count") Integer count){
@@ -42,6 +70,41 @@ public class ItemController {
         product.setPrice(123);
         item.setProduct(product);
 
+        return ResponseEntity.ok(item);
+    }
+
+    @ApiOperation(
+            value = "Create item",
+            notes = "On call, to create item",
+            response = Product.class
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success")
+            ,
+            @ApiResponse(code = 404, message = "Data not found")
+            ,
+            @ApiResponse(code = 502, message = "Remote MULE service not available")
+    })
+    @PostMapping("/")
+    public ResponseEntity<Item> create (@RequestBody Item item){
+        return ResponseEntity.ok(item);
+    }
+
+    @ApiOperation(
+            value = "Create item",
+            notes = "On call, to create item",
+            response = Product.class,
+            responseContainer = "List"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success")
+            ,
+            @ApiResponse(code = 404, message = "Data not found")
+            ,
+            @ApiResponse(code = 502, message = "Remote MULE service not available")
+    })
+    @PostMapping("/multiple")
+    public ResponseEntity<List<Item>> createList (@RequestBody List<Item> item){
         return ResponseEntity.ok(item);
     }
 
