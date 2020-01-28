@@ -1,0 +1,4 @@
+server:
+  port: 8007
+configuration:
+  text: Configuring dev enviroment prod
