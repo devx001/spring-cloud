@@ -9,11 +9,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Validated
 @Api(tags = "/item")
@@ -23,6 +26,9 @@ public class ItemController {
 
     @Autowired
     private IItemService itemService;
+
+    @Value("${configuration.text}")
+    private String text;
 
 
     @ApiOperation(
@@ -106,6 +112,15 @@ public class ItemController {
     @PostMapping("/multiple")
     public ResponseEntity<List<Item>> createList (@RequestBody List<Item> item){
         return ResponseEntity.ok(item);
+    }
+
+    @GetMapping("/config")
+    public ResponseEntity<?> getConfigs (@Value("${server.port}") String port){
+        Map<String, String> json = new HashMap<>();
+        json.put("port", port);
+        json.put("text", text);
+        return ResponseEntity.ok(json);
+
     }
 
 }
