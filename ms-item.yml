@@ -1,4 +1,0 @@
-server:
-  port: 8005
-configuration:
-  text: Configuring dev enviroment default
