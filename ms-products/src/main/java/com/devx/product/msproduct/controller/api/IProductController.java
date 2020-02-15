@@ -1,6 +1,6 @@
 package com.devx.product.msproduct.controller.api;
 
-import com.devx.product.msproduct.model.entity.Product;
+import com.devx.commons.model.entity.Product;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

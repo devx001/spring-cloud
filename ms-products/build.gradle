@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.devx.product'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '1.8'
 
 configurations {
 	developmentOnly
@@ -20,6 +20,16 @@ configurations {
 
 repositories {
 	mavenCentral()
+
+}
+
+allprojects {
+	repositories {
+		jcenter()
+		maven {
+			url 'http://localhost:8080/repository/devx001/'
+		}
+	}
 }
 
 dependencies {
@@ -39,9 +49,13 @@ dependencies {
 	// Swagger Annotation dependencies
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
 	compile 'io.swagger:swagger-annotations:1.5.21'
 
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.0.RELEASE'
+
+	compile files ('libs/commons-0.0.1-SNAPSHOT.jar')
+
 }
 
 test {

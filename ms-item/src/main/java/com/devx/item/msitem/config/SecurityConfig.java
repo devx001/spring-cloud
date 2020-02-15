@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_WHITELIST = {
-            "/actuator/health/**", "/captcha/**", "/host/**", "/h2/**",
+            "/actuator/**", "/captcha/**", "/host/**", "/h2/**",
             // -- swagger ui
             "/swagger-resources/**",
             "/swagger-ui.html",
@@ -24,16 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity security) throws Exception {
-        /*security.cors()
-                .and()
-                .httpBasic().disable()
-                .csrf().disable()
-                .headers().frameOptions().sameOrigin()
-                .and()
-                .authorizeRequests()
-                .antMatchers(AUTH_WHITELIST).permitAll()
-                .anyRequest().authenticated();*/
-
         security.cors()
                 .and()
                 .httpBasic().disable()

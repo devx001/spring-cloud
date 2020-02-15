@@ -1,5 +1,6 @@
 package com.devx.item.msitem.model;
 
+import com.devx.commons.model.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

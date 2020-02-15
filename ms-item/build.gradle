@@ -6,8 +6,8 @@ plugins {
 
 group = 'com.devx.item'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-targetCompatibility = "11"
+sourceCompatibility = '1.8'
+targetCompatibility = "1.8"
 
 configurations {
 	developmentOnly
@@ -58,8 +58,9 @@ dependencies {
 
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
 
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-actuator
-    compile group: 'org.springframework.boot', name: 'spring-boot-actuator', version: '2.2.4.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.4.RELEASE'
+
+	compile files ('libs/commons-0.0.1-SNAPSHOT.jar')
 }
 
 test {
