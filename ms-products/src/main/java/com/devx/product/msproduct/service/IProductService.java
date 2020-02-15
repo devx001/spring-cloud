@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface IProductService {
 
-    List<Product> findAll();
+  List<Product> findAll();
 
-    Product findById (Integer id);
+  Product findById(Integer id);
+
+  Product save(Product product);
+
+  void deleteById(Integer id);
 
 }

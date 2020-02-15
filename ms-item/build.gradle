@@ -58,8 +58,7 @@ dependencies {
 
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
 
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-actuator
-    compile group: 'org.springframework.boot', name: 'spring-boot-actuator', version: '2.2.4.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.4.RELEASE'
 }
 
 test {

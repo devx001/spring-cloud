@@ -1,6 +1,7 @@
 package com.devx.item.msitem.service.impl;
 
 import com.devx.item.msitem.model.Item;
+import com.devx.item.msitem.model.Product;
 import com.devx.item.msitem.restclient.ClientProductRest;
 import com.devx.item.msitem.service.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +14,36 @@ import java.util.stream.Collectors;
 @Service
 public class ItemServiceFeign implements IItemService {
 
-    @Autowired
-    private ClientProductRest clientProductRest;
+  private final ClientProductRest clientProductRest;
 
-    @Override
-    public List<Item> findAll() {
-        return clientProductRest.findAll().stream().map(product -> new Item(product, 1)).collect(Collectors.toList());
-    }
+  public ItemServiceFeign(
+      ClientProductRest clientProductRest) {
+    this.clientProductRest = clientProductRest;
+  }
 
-    @Override
-    public Item findById(Integer id, Integer count) {
-        return new Item(clientProductRest.findById(id), count);
-    }
+  @Override
+  public List<Item> findAll() {
+    return clientProductRest.findAll().stream().map(product -> new Item(product, 1))
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  public Item findById(Integer id, Integer count) {
+    return new Item(clientProductRest.findById(id), count);
+  }
+
+  @Override
+  public Product save(Product product) {
+    return clientProductRest.save(product);
+  }
+
+  @Override
+  public Product update(Product product, Integer id) {
+    return clientProductRest.update(id, product);
+  }
+
+  @Override
+  public void delete(Integer id) {
+    clientProductRest.delete(id);
+  }
 }

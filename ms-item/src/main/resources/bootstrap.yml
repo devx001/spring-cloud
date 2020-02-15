@@ -5,9 +5,9 @@ spring:
     config:
       uri: http://localhost:8888
   profiles:
-    active: prod
+    active: dev
 management:
   endpoints:
     web:
       exposure:
-        include: *
+        include: "*"
