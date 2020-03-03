@@ -3,6 +3,7 @@ package com.devx.item.msitem.service;
 import com.devx.commons.model.entity.Product;
 import com.devx.item.msitem.model.Item;
 
+import com.devx.item.msitem.model.Product;
 import java.util.List;
 
 public interface IItemService {
