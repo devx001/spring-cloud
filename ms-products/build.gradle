@@ -20,7 +20,7 @@ configurations {
 
 repositories {
 	mavenCentral()
-
+	mavenLocal()
 }
 
 allprojects {
@@ -53,8 +53,11 @@ dependencies {
 	compile 'io.swagger:swagger-annotations:1.5.21'
 
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.0.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
 
 	compile("com.devx.commons:commons:0.0.1-SNAPSHOT")
+
+	runtimeOnly 'mysql:mysql-connector-java'
 
 }
 
