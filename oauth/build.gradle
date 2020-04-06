@@ -20,6 +20,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 ext {
@@ -39,8 +40,8 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-
-	compile files ('libs/common-user-0.0.1-SNAPSHOT.jar')
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
+	compile("com.devx.commonuser:common-user:0.0.1-SNAPSHOT")
 }
 
 dependencyManagement {

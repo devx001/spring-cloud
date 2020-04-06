@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Setter
 @Getter
@@ -24,8 +25,8 @@ import lombok.Setter;
 public class Role implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_id_sequence_gen")
-  @SequenceGenerator(name = "role_id_sequence_gen", sequenceName = "role_id_sequence")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id", updatable = false, nullable = false)
   private Integer id;
 
   @Column(unique = true, name = "name")

@@ -18,4 +18,19 @@ zuul:
     user:
       service-id: ms-user
       path: /api/users/**
+    oauth:
+      service-id: ms-oauth
+      path: /api/security/**
+      sensitive-headers: Cookie,Set-Cookie
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ConnectionTimeout: 3000
+  ReadTimeout: 10000

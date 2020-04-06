@@ -54,7 +54,7 @@ dependencies {
 
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.0.RELEASE'
 
-	compile files ('libs/commons-0.0.1-SNAPSHOT.jar')
+	compile("com.devx.commons:commons:0.0.1-SNAPSHOT")
 
 }
 

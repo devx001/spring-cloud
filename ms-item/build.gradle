@@ -60,7 +60,7 @@ dependencies {
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.4.RELEASE'
 
-	compile files ('libs/commons-0.0.1-SNAPSHOT.jar')
+	compile("com.devx.commons:commons:0.0.1-SNAPSHOT")
 }
 
 test {

@@ -57,6 +57,7 @@ public class UserController implements IUserController {
 
     userFound.setName(user.getName());
     userFound.setEmail(user.getEmail());
+    userFound.setAttempts(user.getAttempts());
 
     return new ResponseEntity(userService.save(userFound), HttpStatus.OK);
   }

@@ -2,6 +2,7 @@ package com.devx.oauth.service;
 
 import com.devx.commonuser.model.entity.User;
 import com.devx.oauth.clients.UserFeignClient;
+import feign.FeignException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements IUserService, UserDetailsService {
 
   private final UserFeignClient userFeignClient;
 
@@ -25,22 +26,32 @@ public class UserService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userFeignClient.findByUsername(username);
+    try {
+      User user = userFeignClient.findByUsername(username);
 
-    if(Objects.isNull(user)){
-      log.error("User "+username+" does not exist!");
-      throw new UsernameNotFoundException("User "+username+" does not exist!");
+      List<GrantedAuthority> authorities = user.getRoles().stream()
+          .map(role -> new SimpleGrantedAuthority(role.getName()))
+          .peek(simpleGrantedAuthority -> log.info("Role " + simpleGrantedAuthority.getAuthority()))
+          .collect(Collectors.toList());
+
+      return new org.springframework.security.core.userdetails.User(
+          user.getUsername(),
+          user.getPassword(),
+          authorities
+      );
+    } catch (Exception e) {
+      log.error("User " + username + " does not exist!");
+      throw new UsernameNotFoundException("User " + username + " does not exist!");
     }
+  }
 
-    List<GrantedAuthority> authorities = user.getRoles().stream()
-        .map(role -> new SimpleGrantedAuthority(role.getName()))
-        .peek(simpleGrantedAuthority -> log.info("Role "+simpleGrantedAuthority.getAuthority()))
-        .collect(Collectors.toList());
+  @Override
+  public User findByUsername(String username) {
+    return userFeignClient.findByUsername(username);
+  }
 
-    return new org.springframework.security.core.userdetails.User(
-        user.getUsername(),
-        user.getPassword(),
-        authorities
-    );
+  @Override
+  public User updateUsername(User user, Integer id) {
+    return userFeignClient.updateUsername(user, id);
   }
 }

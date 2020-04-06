@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -18,6 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Setter
 @Getter
@@ -29,8 +29,8 @@ import lombok.Setter;
 public class User implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence_gen")
-  @SequenceGenerator(name = "user_id_sequence_gen", sequenceName = "user_id_sequence")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id", updatable = false, nullable = false)
   private Integer id;
 
   @Column(unique = true, length = 20, name = "username")
@@ -50,6 +50,9 @@ public class User implements Serializable {
 
   @Column(unique = true, length = 100, name = "email")
   private String email;
+
+  @Column(name = "attempts")
+  private int attempts;
 
   @ManyToMany
   @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
