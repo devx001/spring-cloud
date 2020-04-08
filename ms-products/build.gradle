@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'org.springframework.boot' version '2.2.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
 
@@ -21,15 +21,6 @@ configurations {
 repositories {
 	mavenCentral()
 	mavenLocal()
-}
-
-allprojects {
-	repositories {
-		jcenter()
-		maven {
-			url 'http://localhost:8080/repository/devx001/'
-		}
-	}
 }
 
 dependencies {
@@ -58,6 +49,10 @@ dependencies {
 	compile("com.devx.commons:commons:0.0.1-SNAPSHOT")
 
 	runtimeOnly 'mysql:mysql-connector-java'
+
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.2.2.RELEASE'
+	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.2.2.RELEASE'
+
 
 }
 

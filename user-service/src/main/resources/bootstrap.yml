@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-item
+    name: ms-user
   cloud:
     config:
       uri: http://localhost:8888

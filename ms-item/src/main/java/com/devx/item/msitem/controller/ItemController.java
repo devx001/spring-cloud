@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiResponses;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RefreshScope
 @Validated
 @Api(tags = "/item")
@@ -152,6 +154,7 @@ public class ItemController {
 
   @GetMapping("/config")
   public ResponseEntity<?> getConfigs(@Value("${server.port}") String port) {
+    log.info("Printing configs");
     Map<String, String> json = new HashMap<>();
     json.put("port", port);
     json.put("text", text);

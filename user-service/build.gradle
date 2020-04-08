@@ -30,8 +30,9 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+	//implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -39,17 +40,13 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation 'org.springframework.security:spring-security-test'
-
-	// Swagger Annotation dependencies
-	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-
-	compile 'io.swagger:swagger-annotations:1.5.21'
-
-	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.0.RELEASE'
-
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
 	compile("com.devx.commonuser:common-user:0.0.1-SNAPSHOT")
+
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.2.2.RELEASE'
+	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.2.2.RELEASE'
 }
 
 dependencyManagement {
@@ -61,5 +58,3 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 }
-
-

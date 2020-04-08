@@ -1,11 +1,9 @@
 package com.devx.userservice.controller;
 
 import com.devx.commonuser.model.entity.User;
-import com.devx.userservice.controller.api.IUserController;
 import com.devx.userservice.service.IUserService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,15 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
-public class UserController implements IUserController {
+public class UserController {
 
-  @Autowired
-  private IUserService userService;
+  private final IUserService userService;
 
-  @Autowired
-  private Environment environment;
+  public UserController(IUserService userService) {
+    this.userService = userService;
+  }
 
   @GetMapping("/")
   public ResponseEntity<List<User>> findAll() {

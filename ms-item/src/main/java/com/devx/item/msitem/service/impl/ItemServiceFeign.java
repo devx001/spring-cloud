@@ -2,7 +2,6 @@ package com.devx.item.msitem.service.impl;
 
 import com.devx.commons.model.entity.Product;
 import com.devx.item.msitem.model.Item;
-import com.devx.item.msitem.model.Product;
 import com.devx.item.msitem.restclient.ClientProductRest;
 import com.devx.item.msitem.service.IItemService;
 import org.springframework.stereotype.Service;

@@ -2,14 +2,17 @@ package com.devx.item.msitem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-//@RibbonClient(name = "ms-product")
+@RibbonClient(name = "ms-product")
 @EnableSwagger2
-@EnableCircuitBreaker
 @EnableFeignClients
+@EnableCircuitBreaker
+@EntityScan({"com.devx.commons.*"})
 @SpringBootApplication
 public class MsItemApplication {
 
@@ -18,3 +21,5 @@ public class MsItemApplication {
 	}
 
 }
+
+

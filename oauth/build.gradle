@@ -42,6 +42,9 @@ dependencies {
 	}
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
 	compile("com.devx.commonuser:common-user:0.0.1-SNAPSHOT")
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	//implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 }
 
 dependencyManagement {

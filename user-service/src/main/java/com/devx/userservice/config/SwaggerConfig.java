@@ -1,4 +1,4 @@
-package com.devx.userservice.config;
+/*package com.devx.userservice.config;
 
 import com.devx.userservice.UserServiceApplication;
 import io.swagger.annotations.SwaggerDefinition;
@@ -54,3 +54,4 @@ public class SwaggerConfig {
     }
 
 }
+*/

@@ -7,5 +7,7 @@ spring:
         git:
           #uri: file:/home/juanp/git/spring-config
           uri: https://github.com/devx001/spring-config.git
+          username: devx001
+          password: qKsilver1560
 server:
   port: 8888

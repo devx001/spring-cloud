@@ -13,3 +13,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+      springframework:
+        cloud:
+          sleuth: DEBUG

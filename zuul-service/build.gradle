@@ -36,6 +36,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.1.RELEASE'
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	//implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 }
 
 dependencyManagement {
