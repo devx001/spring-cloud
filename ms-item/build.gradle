@@ -65,8 +65,9 @@ dependencies {
 
 	compile("com.devx.commons:commons:0.0.1-SNAPSHOT")
 
-	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.2.2.RELEASE'
-	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.2.2.RELEASE'
+	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.2.2.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.2.2.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.2.6.RELEASE'
 }
 
 dependencyManagement {

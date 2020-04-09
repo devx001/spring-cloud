@@ -1,10 +1,9 @@
 package com.devx.oauth.service;
 
+import brave.Tracer;
 import com.devx.commonuser.model.entity.User;
 import com.devx.oauth.clients.UserFeignClient;
-import feign.FeignException;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,14 +19,16 @@ public class UserService implements IUserService, UserDetailsService {
 
   private final UserFeignClient userFeignClient;
 
-  public UserService(UserFeignClient userFeignClient) {
+  private final Tracer tracer;
+
+  public UserService(UserFeignClient userFeignClient, Tracer tracer) {
     this.userFeignClient = userFeignClient;
+    this.tracer = tracer;
   }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    try {
-      User user = userFeignClient.findByUsername(username);
+    try { User user = userFeignClient.findByUsername(username);
 
       List<GrantedAuthority> authorities = user.getRoles().stream()
           .map(role -> new SimpleGrantedAuthority(role.getName()))
@@ -41,6 +42,7 @@ public class UserService implements IUserService, UserDetailsService {
       );
     } catch (Exception e) {
       log.error("User " + username + " does not exist!");
+      tracer.currentSpan().tag("error.message", "User " + username + " does not exist!: " + e.getCause());
       throw new UsernameNotFoundException("User " + username + " does not exist!");
     }
   }

@@ -3,6 +3,11 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: ms-product
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+     sampler:
+       probability: 1.0
 server:
   servlet:
     contextPath: /
@@ -12,7 +17,7 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 
 logging:
   level:

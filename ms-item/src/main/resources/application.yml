@@ -5,6 +5,11 @@ server:
 spring:
   application:
     name: ms-item
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1.0
 # configuracion ribbon
 #ms-product:
 #  ribbon:
@@ -12,7 +17,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 
 hystrix:
   command:
@@ -25,3 +30,13 @@ hystrix:
 ribbon:
   ConnectionTimeout: 3000
   ReadTimeout: 10000
+
+logging:
+  level:
+    com:
+      devx:
+        item:
+          msitem:
+            restclient:
+              clients: DEBUG
+

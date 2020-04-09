@@ -1,9 +1,14 @@
 spring:
   application:
     name: ms-oauth
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+     sampler:
+       probability: 1.0
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
       format_sql: true
     properties:
       hibernate:
@@ -28,9 +33,13 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 logging:
   level:
     org:
       hibernate:
         SQL: debug
+    com:
+      devx:
+        oauth:
+          clients: DEBUG

@@ -45,8 +45,9 @@ dependencies {
 
 	runtimeOnly 'mysql:mysql-connector-java'
 
-	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.2.2.RELEASE'
-	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.2.2.RELEASE'
+	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.2.2.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.2.2.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.2.6.RELEASE'
 }
 
 dependencyManagement {
