@@ -1,1 +1,22 @@
+server:
+  port: 8080
 
+security:
+  rsa:
+    public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtXMsqdRZmJtARq0nEHSL9bET1DAZaYvqehzKCycuvpt6LFBlJkRXlKAQSqa9lkHHEAOvxzysFhKSQ18+EeL78x00t1wL1f/lmuTV73VnR97rAOOBqg06mMlg0oule+X+pAjzd7fr2CtEoiOpPU5Z0NNX9TQM1O7+Ad2hBpvXADdRa1DHjcZQuRhuE5vMQKLQrfGuPEvUTn1Vz7A16MVdRtKs2e9KpxN1pNgFNxt+/gJcBceWtj88iDc9Lyg1xwd5+U5XC6RH7jYsI34W/rRKXPvGwLBf+VMykbXg7BcifoiyVD7JMCV042eB+1Tf1tDufM4+bNuC8XsKW7rD5NjdtQIDAQAB
+    private-key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC1cyyp1FmYm0BGrScQdIv1sRPUMBlpi+p6HMoLJy6+m3osUGUmRFeUoBBKpr2WQccQA6/HPKwWEpJDXz4R4vvzHTS3XAvV/+Wa5NXvdWdH3usA44GqDTqYyWDSi6V75f6kCPN3t+vYK0SiI6k9TlnQ01f1NAzU7v4B3aEGm9cAN1FrUMeNxlC5GG4Tm8xAotCt8a48S9ROfVXPsDXoxV1G0qzZ70qnE3Wk2AU3G37+AlwFx5a2PzyINz0vKDXHB3n5TlcLpEfuNiwjfhb+tEpc+8bAsF/5UzKRteDsFyJ+iLJUPskwJXTjZ4H7VN/W0O58zj5s24LxewpbusPk2N21AgMBAAECggEAHWrDxfDQacZZwFuYJrnOaxG/VjpKFGuDozKBqxc6I9rPDtol2/Neg5EDsyafO/oEDNucJt/2QknWfqe1R28WS87jWgrJPHOVROxuprjQ+rzwOp+nyOsGIfkcAmZzeMfL5coxtqoRyWUSZnsDmBXYx9tLukwq/GaWtbS5w3mGfNk0PGXFMiMupnR7mFL6x13h9US58AKH4HHlbbLVUTFsUZjv/c99APa5ol4GFJA2qlZM+/oiIU/7OXbo9RZwn0BmS6Dm2f2PrVgGewGXCLnrTBi3+WJ2wXZLUhlP3bgDtSF87yiY8cIIFcSqBL+k8GzN4yfPobcFaG9Q7RI6AsngTQKBgQD+CcJuo/+TWXjasaj4gjg3Ycw2vtFQC7yr3Trs4f2u8LO/CmFsSHsS/dNyQ2e9srBgajion096YhSZ9I9AwECQRrGwRqJ22/o4nYMqAfJSpbMCGY9a9+06+2q0JRjNd3hhfHkJaUbIul9DMrNeSoZSw2Babv8UaRpmUbNR0sV34wKBgQC22efwZSc3u3Fcq2XNQRAX7reLX8iJP7K3ZsEPleGYDIHSNHkOSCVk0ZOJqV1fRB3uirzf+9oiDpFphgbPKG+bUaDbOZzYo5nmAXwkOj87fglHSeX2JCQNBXkG4GQ9b5p4Sx9N8pnpY2TqlsOhfsG42uc703zlSBneHuo91Y3XhwKBgQDhSLhjtA5nlvYFQ35se9bszk7y0b//85iq9TNXdYaqiI1uwv7or1Jt4imM8Ffks72Ukz6R004BY0+PxIDx1EytZfQYNlvHeodpg84ZB8blIksgdphZ/Polz2auQSPAus1H7sHL5c+/HQB0MFc/LGn4pYkiScLuT9L4oEWdL4StLwKBgBablKDVcObkJx0FGB4rqDi9TDZQTnQhyxAABWjO6EirazW5RSpt4ym2+93ucdwAiQ7gWn/7HLpPQM1iQ99DKaFzk0bntavXdoTItDeqd/z8FVuaGHO5fjeZ8J/YCKzL6rZq22EA2OTRZD3ZDDEgggVAE40DFhMnOgOLoPyqNdJrAoGBAMRqaRjjQtd5zxoWQvpUjncUmkJrWfHqVPXlGB5A65n3eIBYelw7+FIyr9zVz261Ep3sK9sSRW4GMg+AbQi9NziDMk/sbel1X7HPLQdQCv0gRdTNT32txbE3W3AFoXZpF8RkPwzy1CdKHoaPOmnq/RKgjiIu6fOQKPJpVPfSgAum
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: employeeModule
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/employee/**
+        - id: consumerModule
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/consumer/**
+          filters:
+            - CustomFilter
